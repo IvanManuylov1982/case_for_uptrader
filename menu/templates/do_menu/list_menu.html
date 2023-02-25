@@ -1,23 +1,40 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-{{request}}
-<ul class="menu">
-
-    <li>
-        <a href="{% url 'category' menu.name %}"> {{menu.name}}</a>
 
 
-        {% if menu.children %}
+<!--{{ context }}-->
+
+
+
+<!--        <a href="{% url 'category' menu.name %}"> {{menu.name}}</a>-->
+
+
+<!--        {% if menu.children %}-->
         <ul>
             {% for c in menu.children.all %}
 
             	    <li>
-                    	<a href="{% url 'category' c.name %}"> {{c.name}}</a>
+                    	<a href="{% url 'category' c.slug %}"> {{c.name}}</a>
+                        {% for elem in c.children.all %}
+                            {% if elem.slug == context %}
+                                {% with active=True %}
+                                {{ active }}
+
+                                {% endwith %}
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {% if c.slug == context    %}
+                            {% if c.children %}
+                                {% include 'do_menu/list_menu.html' with menu=c %}
+                            {% endif %}
+                        {% endif %}
             	    </li>
+
+
 
             {% endfor %}
         </ul>
-        {% endif%}
-    </li>
-</ul>
+<!--        {% endif%}-->
+
+
 

@@ -4,7 +4,7 @@ from .models import Menu
 
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'parent', 'order')
+    list_display = ('id', 'slug', 'name', 'parent', 'order')
 
 
 # @admin.register(SubMenu)
