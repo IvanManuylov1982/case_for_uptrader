@@ -1,40 +1,24 @@
-
-
-<!--{{ context }}-->
-
-
-
-<!--        <a href="{% url 'category' menu.name %}"> {{menu.name}}</a>-->
-
-
-<!--        {% if menu.children %}-->
-        <ul>
-            {% for c in menu.children.all %}
-
-            	    <li>
-                    	<a href="{% url 'category' c.slug %}"> {{c.name}}</a>
-                        {% for elem in c.children.all %}
-                            {% if elem.slug == context %}
-                                {% with active=True %}
-                                {{ active }}
-
-                                {% endwith %}
-                            {% endif %}
-
-                        {% endfor %}
-
-                        {% if c.slug == context    %}
-                            {% if c.children %}
-                                {% include 'do_menu/list_menu.html' with menu=c %}
-                            {% endif %}
+<ul>
+    {% for c in menu.children.all %}
+        <li>
+            <a href="{% url 'category' c.slug %}"> {{c.name}}</a>
+            {% if   c.slug == context  %}
+                {% if c.children %}
+                    {% include 'do_menu/list_menu.html' with menu=c %}
+                {% endif %}
+            {% else %}
+                {% if c.children %}
+                    {% for child in c.children.all %}
+                        {% if child.slug == context %}
+                            {% include 'do_menu/list_menu.html' with menu=c %}
                         {% endif %}
-            	    </li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
 
-
-
-            {% endfor %}
-        </ul>
-<!--        {% endif%}-->
 
 
 

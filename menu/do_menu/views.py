@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import Menu
 
 
 def index(request, category=None):

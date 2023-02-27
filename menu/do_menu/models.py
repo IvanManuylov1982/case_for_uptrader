@@ -12,19 +12,3 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
-
-#
-# class SubMenu(models.Model):
-#     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=50)
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class ListMenu(models.Model):
-#     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-#     list_name = models.CharField(max_length=50)
-#
-#     def __str__(self):
-#         return self.list_name
